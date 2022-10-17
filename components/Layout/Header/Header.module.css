@@ -2,7 +2,43 @@
     width: 1280px;
     height: 48px;
     background: #fff;
-    position: absolute;
-    left: 0px;
-    top: 0px;
+    display: flex;
+    align-items: center;
+}
+.logo__section {
+    width: 208px;
+}
+.logo {
+    width: 78px;
+    margin-left: 24px;
+}
+
+.title__section {
+    margin-left: 20px;
+}
+
+.title {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    color: #111111;
+    margin-left: 18px;
+}
+
+.title__section {
+    /* display: flex;
+    align-items: center; */
+}
+
+.backButton {
+    height: 28px;
+    width: 28px;
+    border: 1px solid #DBDBE2;
+    padding: 9.92px 8.75px;
+    border-radius: 4px;
+    margin-left: 24px;
+    cursor: pointer;
+}
+.backIcon {
+    width: 10.5px;
 }

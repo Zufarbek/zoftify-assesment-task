@@ -1,0 +1,27 @@
+.__btn {
+    width: 144px;
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 10px 8px 10px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.default__btn {
+    background-color: #177EFF;
+    color: #FFF;
+}
+.secondary__btn {
+    background-color: #F5F6FA;
+    color: #111111;
+    margin-left: 8px;
+}
+.secondary__btn span:nth-child(2) {
+    color: #fff
+}
+.count__btn {
+    background: #70AEFD;
+    border-radius: 46px;
+    padding: 4px 8px;
+    font-size: 12px;
+}

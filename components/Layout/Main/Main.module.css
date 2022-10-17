@@ -2,7 +2,6 @@
     width: 1032px;
     height: 640px;
     background: #fff;
-    position: absolute;
-    left: 228px;
-    top: 64px;
+    margin: 16px 20px;
+    border-radius: 8px;
 }

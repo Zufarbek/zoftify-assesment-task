@@ -1,0 +1,20 @@
+.input__with__icon {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 432px;
+}
+.zoftify__input {
+    background: #F5F6FA;
+    border-radius: 8px;
+    padding: 8px 44px 8px 12px;
+    font-size: 13px;
+    width: 100%;
+    height: 40px;
+}
+.input__icon {
+    width: 20px;
+    position: absolute;
+    right: 12px;
+}
+

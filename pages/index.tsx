@@ -1,26 +1,8 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Navbar from '../components/Layout/Header/Header'
+import Props from '../components/Pages/Posts'
 
-const Home: NextPage = () => {
-  return (
-    <div>
-      <Head>
-        <title>Zoftify assesment task</title>
-        <meta name="description" content="Zoftify assesment task" />
-        <link rel="icon" href="/favicon.png" />
-      </Head>
-      
-      <Navbar/>
 
-      <main>
+const HomePage: NextPage = () => <Props/>
 
-      </main>
+export default HomePage
 
-      <footer>
-      </footer>
-    </div>
-  )
-}
-
-export default Home

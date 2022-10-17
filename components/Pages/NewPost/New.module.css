@@ -1,0 +1,14 @@
+.new__post__section {
+    padding: 26px 24px 0px 24px;
+}
+.title {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #2F2F2F;
+}
+.post__form {
+    margin-top: 18px;
+    width: 356px;
+}

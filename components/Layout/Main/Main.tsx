@@ -1,8 +1,15 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 import styles from './Main.module.css'
 
-export default function Main() {
+const Main = ({children}:any) => {
+  const router = useRouter()
   return (
-    <div className={styles.main}>Main</div>
+    <div className={styles.main}>
+      {children}
+    </div>
   )
 }
+
+
+export default Main
