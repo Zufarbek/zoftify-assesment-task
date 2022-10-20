@@ -4,7 +4,7 @@ export const navLinks = [
         en: "Posts",
         //other lang
       },
-      link: "/posts",
+      link: "/",
       icon: "assets/icons/color-swatch.png",
     }
   ];

@@ -25,4 +25,36 @@ export class LocalStorage {
         return items
     }
 
+    filterByStatus(status:any){
+        console.log("salomom", this.posts)
+        if(status == "draft") {
+            let newData = this.posts.filter((item: {status: any}) => {
+                return item.status == status
+            })
+
+            return newData
+        }
+
+        if(status == "published") {
+            let newData = this.posts.filter((item: {status: any}) => {
+                return item.status == status
+            })
+
+            return newData
+        }
+
+        return this.posts
+    }
+
+    changeStatus(id:number, status: string) {
+        let localStorageItem = JSON.parse(localStorage.getItem('posts') || '[]');
+        
+        localStorageItem.map((item: {id: number, status: string}) => {
+            if(item.id == id) (
+                item.status = status
+            )
+        })
+
+        return localStorageItem
+    }
 }

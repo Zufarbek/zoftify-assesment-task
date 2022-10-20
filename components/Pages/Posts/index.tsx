@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
@@ -14,13 +14,55 @@ import { LocalStorage } from '../../../utils/Posts';
 
 export default function App (props: any) {
   const router = useRouter()
-  const tableData = useAppSelector(state => state.posts.value)
+  const posts = useAppSelector(state => state.posts.value)
   const dispatch = useAppDispatch()
+
+  const [tableData, setTableData] = useState([])
+  const [draftData, setDraftData] = useState([])
+  const [publishedData, setPublishedData] = useState([])
+  const [btnStatus, setBtnStatus] = useState("all")
 
   useEffect(() => {
     let LocalPosts = new LocalStorage()
     dispatch(addPost(LocalPosts.posts))
+    
+    setTableData(LocalPosts.posts)
+    setDraftData(LocalPosts.filterByStatus("draft"))
+    setPublishedData(LocalPosts.filterByStatus("published"))
+
   }, [])
+
+  function filterData(status:any, value:any){
+    if(status == "draft") {
+      setTableData(draftData)
+      setBtnStatus("draft")
+    }
+    if(status == "published") {
+      setTableData(publishedData)
+      setBtnStatus("published")
+    }
+    if(status == "all") {
+      setTableData(posts)
+      setBtnStatus("all")
+    }
+    if(status == "byTitle") {
+      console.log(value)
+      let newData = posts.filter((item: {title: any}) => {
+        return item.title.toLowerCase().includes(value.toLowerCase())
+      })
+      console.log("newData", newData)
+      
+      setTableData(newData)
+    }
+  }
+
+  function changeStatus(statusId:any, statusItem:any) {
+    let LocalPosts = new LocalStorage()
+    let newPosts = LocalPosts.changeStatus(statusId, statusItem)
+    dispatch(addPost(newPosts))
+
+    window.location.reload();    
+  }
 
   return (
     <>
@@ -33,17 +75,17 @@ export default function App (props: any) {
       <div className={styles.main}>
 
         <div className={styles.top}>
-          <Input type="text" width="432px" placeholder="Search" icon="assets/icons/search.png"/>
+          <Input onInput={(value:any) => filterData("byTitle", value)} type="text" width="432px" placeholder="Search" icon="assets/icons/search.png"/>
           <ActionButton handleClick={() => {router.push("/newpost")}} text="Create Post" />
         </div>
 
         <div className={styles.tabs}>
-            <TabButton type="default" text="All statuses" count="20"/>
-            <TabButton type="secondary" text="Draft" count="1"/>
-            <TabButton type="secondary" text="Published" count="19"/>
+            <TabButton onClick={() => filterData("all", null)} type={(btnStatus == "all")? "default" : "secondary"} text="All statuses" count={posts.length}/>
+            <TabButton onClick={() => filterData("draft", null)} type={(btnStatus == "draft")? "default" : "secondary"} text="Draft" count={draftData.length}/>
+            <TabButton onClick={() => filterData("published", null)} type={(btnStatus == "published")? "default" : "secondary"} text="Published" count={publishedData.length}d/>
         </div>
 
-        <Table data={tableData}/>
+        <Table data={tableData} changeStatus={(itemStatus: {statusId: number, statusItem: string}) => changeStatus(itemStatus.statusId, itemStatus.statusItem)}/>
       </div>
     </>
   );
