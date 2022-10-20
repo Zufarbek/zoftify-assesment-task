@@ -1,6 +1,6 @@
-import * as React from 'react';import { useRouter } from 'next/router'
+import React, {useEffect} from 'react';
+import { useRouter } from 'next/router'
 import Head from 'next/head'
-
 
 import styles from './Posts.module.css'
 import Input from '../../Inputs/Inputs'
@@ -8,9 +8,20 @@ import ActionButton from '../../Buttons/ActionButton'
 import TabButton from '../../Buttons/TabButton'
 import Table from '../../Table/Table'
 import Link from 'next/link'
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { addPost } from '../../../store/slices/posts';
+import { LocalStorage } from '../../../utils/Posts';
 
 export default function App (props: any) {
-    const router = useRouter()
+  const router = useRouter()
+  const tableData = useAppSelector(state => state.posts.value)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    let LocalPosts = new LocalStorage()
+    dispatch(addPost(LocalPosts.posts))
+  }, [])
+
   return (
     <>
       <Head>
@@ -32,7 +43,7 @@ export default function App (props: any) {
             <TabButton type="secondary" text="Published" count="19"/>
         </div>
 
-        <Table/>
+        <Table data={tableData}/>
       </div>
     </>
   );

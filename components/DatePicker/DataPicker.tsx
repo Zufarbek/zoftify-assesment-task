@@ -1,8 +1,10 @@
 import React from 'react'
 import styles from './DatePicker.module.css'
 
-export default function DataPicker() {
+export default function DataPicker({id}:any) {
   return (
-    <input className={styles.zoftify__date} type="date" />
+    <>
+        <input id={id} className={styles.zoftify__date} type="date"/>
+    </>
   )
 }

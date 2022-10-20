@@ -1,18 +1,49 @@
-import * as React from 'react';
-import { useRouter } from 'next/router'
+import React, { useEffect } from 'react';
 import Head from 'next/head'
+
+import { useAppSelector, useAppDispatch } from '../../../store/hooks'
 
 
 import styles from './New.module.css'
 import Input from '../../Inputs/Inputs'
 import ActionButton from '../../Buttons/ActionButton'
-import TabButton from '../../Buttons/TabButton'
 import Table from '../../Table/Table'
 import Select from '../../Select/Select';
 import DataPicker from '../../DatePicker/DataPicker';
+import { addPost } from '../../../store/slices/posts';
+import { LocalStorage } from '../../../utils/Posts';
 
 export default function NewPost (props: any) {
-    const router = useRouter()
+
+  const posts = useAppSelector((state) => state.posts.value)
+  const dispatch = useAppDispatch()
+  
+  console.log("posts", posts)
+
+
+  useEffect(() => {
+    let LocalPosts = new LocalStorage()
+    dispatch(addPost(LocalPosts.posts))
+    console.log("local => " , LocalPosts.posts)
+  }, [])
+
+  function createPost(){
+    console.log("Ishlaypati")
+  }
+
+  function handleSubmit(e:any) {
+    e.preventDefault()
+    let LocalPosts = new LocalStorage()
+    let data = {
+      title: e.target.elements.title.value,
+      status: e.target.elements.status.value,
+      time: e.target.elements.time.value,
+      id: LocalPosts.lastId + 1
+    }
+    dispatch(addPost(data))
+    
+}
+  
   return (
     <div>
       <Head>
@@ -25,12 +56,13 @@ export default function NewPost (props: any) {
         <h3 className={styles.title}>Post information</h3>
 
         <div className={styles.post__form}>
-          <Input type="text" placeholder="Title"/>
-          <Select/>
-          <DataPicker/>
-          <ActionButton text="Submit" className="mt-8"/>
+          <form onSubmit={handleSubmit}>
+            <Input id="title" type="text" placeholder="Title"/>
+            <Select id="status"/>
+            <DataPicker id="time"/>
+            <ActionButton type="submit" className="mt-8" text="Submit"/>
+          </form>
         </div>
-
       </div>
     </div>
   );
