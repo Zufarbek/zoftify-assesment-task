@@ -2,6 +2,8 @@
 
 .main__table {
     margin-top: 15.5px;
+    height: 438px;
+    overflow-y: scroll;
 }
 .table {
     width: 100%;

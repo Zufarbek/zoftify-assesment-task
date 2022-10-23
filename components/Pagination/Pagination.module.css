@@ -31,3 +31,16 @@
     color: #667281;
     margin: 0px 2px;
 }
+.showing__per__page {
+    font-size: 14px;
+    width: 64px;
+    height: 36px;
+    padding: 10px 12px;
+    background: #F5F6FA;
+    border-radius: 4px;
+    margin-right: 12px
+}
+.showing {
+    font-size: 13px;
+    color: #667281;
+}

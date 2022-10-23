@@ -17,6 +17,7 @@ export default function App (props: any) {
   const posts = useAppSelector(state => state.posts.value)
   const dispatch = useAppDispatch()
 
+  //Tabs
   const [tableData, setTableData] = useState([])
   const [draftData, setDraftData] = useState([])
   const [publishedData, setPublishedData] = useState([])
@@ -24,7 +25,7 @@ export default function App (props: any) {
 
   //Pagination
   const [allPerPage, setAllPerPage] = useState([])
-  const itemPerPage = 5
+  const [itemPerPage, setItemPerPage] = useState(5)
   const [page, setPage] = useState(1)
 
   useEffect(() => {
@@ -35,7 +36,7 @@ export default function App (props: any) {
     setPublishedData(LocalPosts.filterByStatus("published"))
 
     setAllPerPage(LocalPosts.posts)
-  }, [])
+  }, [itemPerPage])
   
   function filterData(status:any, value:any){
     setPage(1)
@@ -88,7 +89,7 @@ export default function App (props: any) {
         </div>
 
         <Table data={tableData}/>
-        <Pagination itemPerPage={itemPerPage} page={page} setPage={(value:any) => setPage(value)} allPerPage={allPerPage} btnStatus={btnStatus} draftData={draftData} publishedData={publishedData} posts={posts} setTableData={(tableData:any) => setTableData(tableData)}/>
+        <Pagination itemPerPage={itemPerPage} setItemPerPage={(value:any) => setItemPerPage(value)} page={page} setPage={(value:any) => setPage(value)} allPerPage={allPerPage} btnStatus={btnStatus} draftData={draftData} publishedData={publishedData} posts={posts} setTableData={(tableData:any) => setTableData(tableData)}/>
       </div>
     </>
   );

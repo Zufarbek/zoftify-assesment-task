@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import styles from './Pagination.module.css'
 
-export default function Pagination({itemPerPage, allPerPage, btnStatus, page, setPage, setTableData, draftData, publishedData, posts}:any) {
+export default function Pagination({itemPerPage, setItemPerPage, allPerPage, btnStatus, page, setPage, setTableData, draftData, publishedData, posts}:any) {
     const [pagesArr, setPagesArr] = useState([])
 
     useEffect(() => {
@@ -25,18 +25,19 @@ export default function Pagination({itemPerPage, allPerPage, btnStatus, page, se
     }
   
     
-    
   return (
     <div className={styles.pagination}>
         <div className={styles.left}>
-            <select name="" id="">
-                <option value="">5</option>
-                <option value="">6</option>
+            <select onChange={(e:any) => setItemPerPage(e.target.value)} value={itemPerPage} className={styles.showing__per__page}>
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={15}>15</option>
+                <option value={posts.length}>all</option>
             </select>
-            <span>Showing 1-5 of 20</span>
+            <span className={styles.showing}>Showing 1 - {itemPerPage} of {posts.length}</span>
         </div>
         <div className={styles.right}>
-            <button className={styles.btn__prev__next}>{"<"}</button>
+            <button className={styles.btn__prev__next} onClick={() => newPage(page-1)} disabled={(page == 1) && true}>{"<"}</button>
             {
                 pagesArr.map((item:any, index:any) => {
                     return (
@@ -44,7 +45,7 @@ export default function Pagination({itemPerPage, allPerPage, btnStatus, page, se
                     )
                 })
             }
-            <button className={styles.btn__prev__next}>{">"}</button>
+            <button className={styles.btn__prev__next} onClick={() => newPage(page+1)} disabled={(page == pagesArr.length) && true} >{">"}</button>
         </div>
     </div>
   )
