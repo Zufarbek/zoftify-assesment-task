@@ -26,7 +26,6 @@ export default function App (props: any) {
   const [allPerPage, setAllPerPage] = useState([])
   const itemPerPage = 5
   const [page, setPage] = useState(1)
-  // const [pagesArr, setPagesArr] = useState([])
 
   useEffect(() => {
     let LocalPosts = new LocalStorage()
@@ -37,26 +36,6 @@ export default function App (props: any) {
 
     setAllPerPage(LocalPosts.posts)
   }, [])
-
-  // function newPage(currentPage:any, status: any){
-  //   console.log("currentPage => ", currentPage)
-  //   console.log("page", page)
-  //   if(status == "draft") {
-  //     setTableData(draftData.slice((currentPage-1) * itemPerPage, (currentPage) * itemPerPage))
-  //   }
-  //   if(status == "published") {
-  //     setTableData(publishedData.slice((currentPage-1) * itemPerPage, (currentPage) * itemPerPage))
-  //   }
-  //   if(status == "all") {
-  //     setTableData(posts.slice((currentPage-1) * itemPerPage, (currentPage) * itemPerPage))
-  //   }
-  //   setPage(currentPage)
-  // }
-
-  // function perPage(array:any){
-  //   let newPagesArr:any = new Array(Math.ceil(array.length / itemPerPage)).fill(0)
-  //   setPagesArr(newPagesArr)
-  // }
   
   function filterData(status:any, value:any){
     setPage(1)
@@ -87,14 +66,6 @@ export default function App (props: any) {
     }
   }
 
-  function changeStatus(statusId:any, statusItem:any) {
-    let LocalPosts = new LocalStorage()
-    let newPosts = LocalPosts.changeStatus(statusId, statusItem)
-    dispatch(addPost(newPosts))
-
-    window.location.reload();    
-  }
-
   return (
     <>
       <Head>
@@ -116,7 +87,7 @@ export default function App (props: any) {
             <TabButton onClick={() => filterData("published", null)} type={(btnStatus == "published")? "default" : "secondary"} text="Published" count={publishedData.length}d/>
         </div>
 
-        <Table data={tableData} changeStatus={(itemStatus: {statusId: number, statusItem: string}) => changeStatus(itemStatus.statusId, itemStatus.statusItem)}/>
+        <Table data={tableData}/>
         <Pagination itemPerPage={itemPerPage} page={page} setPage={(value:any) => setPage(value)} allPerPage={allPerPage} btnStatus={btnStatus} draftData={draftData} publishedData={publishedData} posts={posts} setTableData={(tableData:any) => setTableData(tableData)}/>
       </div>
     </>

@@ -1,8 +1,19 @@
 import React from 'react'
+import { LocalStorage } from '../../utils/Posts'
 import styles from './Table.module.css'
+import { useAppDispatch } from '../../store/hooks'
+import { addPost } from '../../store/slices/posts'
 
-export default function Table({data, changeStatus}:any) {
-    console.log(data)
+export default function Table({data}:any) {
+    const dispatch = useAppDispatch()
+    
+  function changeStatus(statusId:any, statusItem:any) {  
+    let LocalPosts = new LocalStorage()
+    let newPosts = LocalPosts.changeStatus(statusId, statusItem)
+    dispatch(addPost(newPosts))
+
+    window.location.reload(); 
+  }
   return (
     <div className={styles.main__table}>
         {
@@ -25,7 +36,7 @@ export default function Table({data, changeStatus}:any) {
                                         <td className={styles.body__col}>{item.title}</td>
                                         <td className={styles.body__col}>{item.time}</td>
                                         <td className={styles.body__col}>
-                                            <select onChange={(e) => changeStatus({statusId: item.id, statusItem: e.target.value})} value={item.status} >
+                                            <select onChange={(e) => changeStatus(item.id, e.target.value)} value={item.status} >
                                                 <option value="published" key="1">Published</option>
                                                 <option value="draft" key="2">Draft</option>
                                             </select>
