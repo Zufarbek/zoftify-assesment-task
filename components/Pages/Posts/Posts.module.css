@@ -1,4 +1,6 @@
-
+.main {
+    position: relative;
+}
 .top {
     padding: 26px 24px 0px 24px;
     display: flex;

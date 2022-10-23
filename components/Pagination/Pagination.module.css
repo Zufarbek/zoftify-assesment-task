@@ -1,0 +1,33 @@
+.pagination {
+    position: absolute;
+    bottom: 14px;
+    right: 24px;
+    left: 24px;
+    display: flex;
+    justify-content: space-between;
+}
+.btn__pagination {
+    width: 32px;
+    height: 32px;
+    color: #667281;
+    font-size: 14px;
+    text-align: center;
+    margin: 0px 2px;
+
+}
+.btn__pag__active {
+    width: 32px;
+    height: 32px;
+    background: #177EFF;
+    border-radius: 4px;
+    color: white;
+    margin: 0px 2px;
+}
+.btn__prev__next {
+    width: 32px;
+    height: 32px;
+    background: #F5F6FA;
+    border-radius: 4px;
+    color: #667281;
+    margin: 0px 2px;
+}
