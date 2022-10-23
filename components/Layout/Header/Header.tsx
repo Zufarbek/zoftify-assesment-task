@@ -20,7 +20,7 @@ export default function Header() {
           </div>
         )
       }
-        <h3 className={styles.title}>{(router.pathname == "/")? "Posts" : "New Posts" }</h3>
+        <h3 className={styles.title}>{(router.pathname == "/") && "Posts" || (router.pathname == "/newpost") && "New Post" }</h3>
       </div>
     </div>
   )

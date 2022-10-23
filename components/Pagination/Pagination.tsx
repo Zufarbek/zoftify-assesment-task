@@ -5,8 +5,10 @@ export default function Pagination({itemPerPage, setItemPerPage, allPerPage, btn
     const [pagesArr, setPagesArr] = useState([])
 
     useEffect(() => {
+        if(allPerPage.length > 0){
         let newPagesArr:any = new Array(Math.ceil(allPerPage.length / itemPerPage)).fill(0)
         setPagesArr(newPagesArr)
+        }
     }, [allPerPage])
 
     function newPage(currentPage:any){

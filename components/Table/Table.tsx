@@ -50,7 +50,7 @@ export default function Table({data}:any) {
             )
             
             : (
-                <div className="m-6">NO DATA..</div>
+                <div className="m-6">No data..</div>
             )
         }
     </div>

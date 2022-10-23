@@ -31,7 +31,10 @@ export default function App (props: any) {
   useEffect(() => {
     let LocalPosts = new LocalStorage()
     dispatch(addPost(LocalPosts.posts))
-    setTableData(LocalPosts.posts.slice((page-1) * itemPerPage, (page) * itemPerPage))
+    if(btnStatus == 'all') {setTableData(LocalPosts.posts.slice((page-1) * itemPerPage, (page) * itemPerPage))}
+    if(btnStatus == 'published') {setTableData(publishedData.slice((page-1) * itemPerPage, (page) * itemPerPage))}
+    if(btnStatus == 'draft') {setTableData(draftData.slice((page-1) * itemPerPage, (page) * itemPerPage))}
+    
     setDraftData(LocalPosts.filterByStatus("draft"))
     setPublishedData(LocalPosts.filterByStatus("published"))
 

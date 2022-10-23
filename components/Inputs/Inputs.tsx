@@ -6,7 +6,7 @@ export default function Input({width, type, placeholder, icon, id, onInput}:any)
     onInput ? (
       <div className={styles.input__with__icon}>
 
-          <input onInput={(e: {target: any}) => onInput(e.target.value)} id={id} className={styles.zoftify__input} type={type} width={width} placeholder={placeholder} />
+          <input onInput={(e: {target: any}) => onInput(e.target.value)} id={id} className={styles.zoftify__input} type={type} width={width} placeholder={placeholder} required />
           {
               (icon) && <img src={icon} alt={placeholder} className={styles.input__icon} />
           }
@@ -17,7 +17,7 @@ export default function Input({width, type, placeholder, icon, id, onInput}:any)
 
       <div className={styles.input__with__icon}>
 
-          <input id={id} className={styles.zoftify__input} type={type} width={width} placeholder={placeholder} />
+          <input id={id} className={styles.zoftify__input} type={type} width={width} placeholder={placeholder} required/>
           {
               (icon) && <img src={icon} alt={placeholder} className={styles.input__icon} />
           }

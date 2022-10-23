@@ -12,24 +12,17 @@ import Select from '../../Select/Select';
 import DataPicker from '../../DatePicker/DataPicker';
 import { addPost } from '../../../store/slices/posts';
 import { LocalStorage } from '../../../utils/Posts';
+import {useRouter} from 'next/router'
 
-export default function NewPost (props: any) {
+export default function NewPost () {
 
-  const posts = useAppSelector((state) => state.posts.value)
   const dispatch = useAppDispatch()
-  
-  console.log("posts", posts)
-
+  const router = useRouter()
 
   useEffect(() => {
     let LocalPosts = new LocalStorage()
     dispatch(addPost(LocalPosts.posts))
-    console.log("local => " , LocalPosts.posts)
   }, [])
-
-  function createPost(){
-    console.log("Ishlaypati")
-  }
 
   function handleSubmit(e:any) {
     e.preventDefault()
@@ -40,7 +33,11 @@ export default function NewPost (props: any) {
       time: e.target.elements.time.value,
       id: LocalPosts.lastId + 1
     }
+
     dispatch(addPost(data))
+
+    alert("added successfully")
+    router.replace("/")
     
 }
   
