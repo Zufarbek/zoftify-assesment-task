@@ -6,6 +6,7 @@ export const navLinks = [
       },
       link: "/",
       icon: "assets/icons/color-swatch.png",
+      
     }
   ];
   
